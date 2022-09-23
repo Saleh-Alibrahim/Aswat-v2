@@ -1,18 +1,15 @@
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await signIn('credentials', {
-      email,
-      password,
-      redirect: false,
-    });
-    console.log(email, password);
   };
   return (
     <div className='body-background'>
@@ -29,11 +26,22 @@ const Login = () => {
                     <div className='p-5'>
                       <div className='text-center'>
                         <h3 className='text-dark mb-4' data-bs-hover-animate='tada'>
-                          مرحبا بعودتك
+                          إنشاء حساب
                           <br />
                         </h3>
                       </div>
                       <form onSubmit={handleSubmit} id='login-form' className='user'>
+                        <div className='form-group'>
+                          <input
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            className='form-control form-control-user'
+                            type='username'
+                            id='username'
+                            placeholder='إسم المستخدم'
+                            name='username'
+                          />
+                        </div>
                         <div className='form-group'>
                           <input
                             value={email}
@@ -41,7 +49,6 @@ const Login = () => {
                             className='form-control form-control-user'
                             type='email'
                             id='email'
-                            aria-describedby='emailHelp'
                             placeholder='الإيميل'
                             name='email'
                           />
@@ -58,29 +65,27 @@ const Login = () => {
                           />
                         </div>
                         <div className='form-group'>
-                          <div className='text-right text-sm-right text-md-right text-lg-right text-xl-right custom-control custom-checkbox small'>
-                            <div className='form-check'>
-                              <input className='form-check-input custom-control-input' type='checkbox' id='formCheck' />
-                              <label className='form-check-label custom-control-label' id='remeber-me' htmlFor='formCheck'>
-                                تذكرني
-                              </label>
-                            </div>
-                          </div>
+                          <input
+                            value={password2}
+                            onChange={(e) => setPassword2(e.target.value)}
+                            className='form-control form-control-user'
+                            type='password'
+                            id='password2'
+                            placeholder='إعادة كلمة المرور'
+                            name='password2'
+                          />
                         </div>
+
                         <button className='btn btn-primary btn-block text-white btn-user' id='login-btn' type='submit'>
-                          تسجيل الدخول
+                          إنشاء حساب
                         </button>
 
                         <hr className='rem-hr' />
                       </form>
-                      <div className='text-center'>
-                        <a className='small redirect-password' href='/auth/forgotpassword'>
-                          نسيت كلمة المرور ؟
-                        </a>
-                      </div>
+                      <div className='text-center'></div>
                       <div className='text-center'>
                         <a href='/auth/register' className='small redirect-password'>
-                          ما عندك حساب ؟ تفضل من هنا
+                          عندك حساب ؟ تفضل من هنا
                         </a>
                       </div>
                     </div>
