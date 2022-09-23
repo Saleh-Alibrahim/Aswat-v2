@@ -1,0 +1,388 @@
+/*
+ * Globals
+ */
+
+/* Links */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500&display=swap');
+
+/* Custom default button */
+
+/*
+ * Base structure
+ */
+body {
+  font-family: 'Tajawal' !important;
+  background-color: white;
+}
+
+.container {
+  margin: auto;
+}
+
+.card-container {
+  padding: 0 8%;
+}
+
+.forgot-container {
+  padding: 0 10%;
+}
+
+.body-background {
+  height: 100%;
+  display: flex;
+  padding-top: 70px;
+  align-items: center;
+  justify-content: center;
+  background: url('/images/header-background.jpg') center / cover no-repeat, white;
+}
+
+.footer-bottom {
+  height: 50px;
+}
+.footer-bottom p {
+  font-size: 15px;
+}
+
+.padding {
+  padding-bottom: 0;
+}
+
+#title {
+  direction: RTL;
+  font-size: 1.8rem;
+  margin: 10px 0;
+  border: 0;
+  background-color: white;
+}
+#title:focus {
+  background-color: white;
+  border-color: white;
+  box-shadow: 0 0 0 0 white;
+}
+
+.settings-label {
+  font-size: 1.1rem;
+}
+
+#submit-btn {
+  background-color: #00bfd8;
+  border: 2px solid #00bfd8;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+#password-btn {
+  background-color: #ff2a26;
+  border: 2px solid #ff2a26;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+#password-btn:hover {
+  background-color: transparent;
+  color: #ff2a26 !important;
+}
+#submit-btn:hover {
+  background-color: transparent;
+  color: #00bfd8 !important;
+}
+
+#add-questions {
+  float: right;
+}
+
+#vote-title {
+  text-align: center;
+  font-family: 'Tajawal';
+  margin: 5% 0;
+  font-size: 2rem;
+}
+
+.option {
+  direction: RTL;
+  padding: 20px;
+  border: 0;
+  margin: 0;
+  font-size: 1.3rem;
+  background-color: white;
+}
+
+.select-hide {
+  direction: RTL;
+}
+
+.admin-area h4 {
+  font-weight: 500;
+}
+
+.option:focus {
+  background-color: white;
+  border-color: white;
+  box-shadow: 0 0 0 0 white;
+}
+
+#buttons-list {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#result-button {
+  font-family: 'Tajawal';
+  float: right;
+}
+
+#vote-button {
+  font-family: 'Tajawal';
+  float: left;
+}
+
+.hidden {
+  display: none;
+}
+
+#copy-button {
+  font-family: 'Tajawal';
+  float: left;
+}
+
+#goVote-button {
+  font-family: 'Tajawal';
+  float: right;
+}
+.progress-bar {
+  background-color: #00bfd8;
+}
+.progress {
+  height: 26px;
+}
+.progress-text {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.form-check label {
+  font-family: 'Tajawal';
+  margin-right: 30px;
+  font: 550 1rem 'Tajawal', sans-serif;
+  color: #393939;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+.option-name {
+  font: 550 1.4rem 'Tajawal', sans-serif;
+  color: #393939;
+}
+
+.form-check input {
+  font-family: 'Tajawal';
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+#toast {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: #00bfd8;
+  color: #fff;
+  padding: 16px;
+  margin-top: 40px;
+  border-radius: 4px;
+  text-align: center;
+  z-index: 1;
+  box-shadow: 0 0 20px rgba(208, 136, 136, 0.3);
+  visibility: hidden;
+  opacity: 0;
+}
+.width-view {
+  width: 500px !important;
+}
+
+.dashboard-view {
+  width: 800px !important;
+}
+.user-img {
+  border-radius: 50%;
+}
+.user-details {
+  vertical-align: middle;
+}
+#toast.show {
+  visibility: visible;
+  animation: fadeInOut 3s;
+}
+.delete-button {
+  color: #00bfd8;
+}
+
+.info-button {
+  color: #00bfd8;
+}
+.nav-tabs {
+  text-shadow: none;
+  color: #495057;
+  text-decoration: none;
+}
+.table th,
+.table td {
+  vertical-align: middle;
+}
+.table thead th {
+  vertical-align: middle;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.vote-count {
+  float: left;
+  margin-left: 5px;
+}
+.poll-option h4 {
+  display: inline;
+  font-family: 'Tajawal', sans-serif;
+}
+#poll-title {
+  text-align: center;
+  font-family: 'Tajawal', sans-serif;
+  margin: 30px 0;
+  font-size: 2rem;
+  line-height: normal;
+}
+
+.title-link a {
+  text-decoration: none;
+  color: black;
+}
+.title-link a:hover {
+  color: #00bfd8;
+}
+#btn-spinner {
+  display: none;
+}
+#vote-count {
+  text-align: center;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+#poll-link {
+  width: 18rem;
+  text-align: left;
+}
+.result-footer {
+  background-color: #00bfd8;
+}
+#poll-link:hover,
+#poll-link:focus {
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+}
+hr {
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.rem-hr {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.form-check hr {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.form-control:focus {
+  box-shadow: none;
+}
+
+.custom-control-input:checked ~ .custom-control-label:before {
+  border-color: #00bfd8;
+  background-color: #00bfd8;
+}
+.progress-hr {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0 !important;
+  border: 0;
+}
+
+@keyframes fadeInOut {
+  5%,
+  95% {
+    opacity: 1;
+    top: 50px;
+  }
+  15%,
+  85% {
+    opacity: 1;
+    top: 30px;
+  }
+}
+
+.form-check h3 {
+  font-weight: 500;
+}
+
+.options {
+  font-size: 1.2rem !important;
+}
+.table-striped {
+  font-size: 1.22rem !important;
+}
+
+/*
+ * NavBar
+ */
+
+#mobile-nav-display {
+  display: none !important;
+}
+
+/*
+ * Media
+ */
+
+/* In case of tablet users: */
+@media screen and (max-width: 991px) {
+  .card-container {
+    padding: 0;
+  }
+  .poll-btn {
+    padding: 1rem 1.5rem 1rem 1.5rem;
+  }
+  #main-nav-display {
+    display: none;
+  }
+  #mobile-nav-display {
+    display: flex !important;
+  }
+}
+/* In case of mobile users: */
+@media screen and (max-width: 700px) {
+  .card-container {
+    padding: 10px;
+  }
+  .poll-btn {
+    padding: 1rem 1.5rem 1rem 1.5rem;
+  }
+  #main-nav-display {
+    display: none;
+  }
+  #mobile-nav-display {
+    display: flex !important;
+  }
+}
+
+/*
+ * Footer
+ */
