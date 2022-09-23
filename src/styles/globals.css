@@ -115,7 +115,12 @@ form.user .form-control-user {
 .text-center.flex-grow-1.bg-register-image {
   margin-left: 10px;
 }
-
+.bg-register-image {
+  height: 100%;
+  width: 100%;
+  min-width: auto;
+  background: url(/images/testimonials-2-men-talking.svg) center / auto no-repeat;
+}
 #btn-user-submit:hover {
   background-color: transparent;
   color: #00bfd8 !important;
