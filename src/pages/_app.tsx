@@ -7,10 +7,13 @@ import superjson from 'superjson';
 import type { AppType } from 'next/app';
 import type { AppRouter } from '../server/router';
 import type { Session } from 'next-auth';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
+import '../styles/lib/bootstrap.min.css';
+import '../styles/lib/swiper.css';
+import '../styles/lib/magnific-popup.css';
 import '../styles/main.css';
 import '../styles/globals.css';
-import 'font-awesome/css/font-awesome.css';
+import '../styles/lib/fontawesome-all.css';
 
 import Layout from './component/layout/Layout';
 
