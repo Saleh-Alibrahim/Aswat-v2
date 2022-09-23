@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
+import Footer from './Footer';
 import Navbar from './Navbar';
 
 interface ILayout {
@@ -27,6 +28,7 @@ const Layout = ({ children }: ILayout) => {
       </Head>
       <Navbar />
       {children}
+      <Footer />
     </>
   );
 };
