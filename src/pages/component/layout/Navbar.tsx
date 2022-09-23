@@ -3,13 +3,13 @@ import React from 'react';
 const Navbar = () => {
   return (
     <nav className='navbar navbar-expand-lg navbar-dark navbar-custom fixed-top'>
-      <a className='navbar-brand logo-text ' href='/'>
+      {/* <a className='navbar-brand logo-text ' href='/'>
         اصوات
       </a>
 
       <a className='navbar-brand logo-image' href='/'>
         <img src='images/logo.svg' alt='alternative' />
-      </a>
+      </a> */}
 
       <button
         className='navbar-toggler ml-auto'
