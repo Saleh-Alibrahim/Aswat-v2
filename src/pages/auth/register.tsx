@@ -1,15 +1,25 @@
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { ISignUp } from '../../common/validation/auth';
+import { trpc } from '../../utils/trpc';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const { mutateAsync } = trpc.useMutation(['auth.register']);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const formData: ISignUp = { username, email, password };
+
+    const result = await mutateAsync(formData);
+    console.log('result', result);
+    if (result.status === 201) {
+    }
   };
   return (
     <div className='body-background'>
