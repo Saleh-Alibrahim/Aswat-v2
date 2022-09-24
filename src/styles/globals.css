@@ -143,8 +143,8 @@ form.user .form-control-user {
   font-size: 1rem;
 }
 
-#logout {
-  display: none;
+.logout {
+  cursor: pointer;
 }
 #login-btn {
   background-color: #00bfd8;

@@ -1,8 +1,12 @@
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ISignUp } from '../../common/validation/auth';
 import { trpc } from '../../utils/trpc';
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
+import { errorAlert, successAlertTimer } from '../../utils/alert';
+import { useRouter } from 'next/router';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,15 +14,28 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const { mutateAsync } = trpc.useMutation(['auth.register']);
+  const swal = withReactContent(Swal);
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      router.push('/');
+    }
+  }, [session]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData: ISignUp = { username, email, password };
-
-    const result = await mutateAsync(formData);
-    console.log('result', result);
-    if (result.status === 201) {
+    try {
+      e.preventDefault();
+      const formData: ISignUp = { username, email, password };
+      const result = await mutateAsync(formData);
+      if (result.status === 201) {
+        successAlertTimer(swal, result.message);
+        router.push('/auth/login');
+      }
+    } catch (error: any) {
+      console.log(error);
+      errorAlert(swal, error.message);
     }
   };
   return (
@@ -94,9 +111,9 @@ const Login = () => {
                       </form>
                       <div className='text-center'></div>
                       <div className='text-center'>
-                        <a href='/auth/register' className='small redirect-password'>
-                          عندك حساب ؟ تفضل من هنا
-                        </a>
+                        <Link href='/auth/login'>
+                          <a className='small redirect-password'>عندك حساب ؟ تفضل من هنا</a>
+                        </Link>
                       </div>
                     </div>
                   </div>

@@ -1,18 +1,44 @@
-import { signIn } from 'next-auth/react';
-import React, { useState } from 'react';
+import { signIn, useSession } from 'next-auth/react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import { errorAlert, successAlertTimer } from '../../utils/alert';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const swal = withReactContent(Swal);
+  const router = useRouter();
+
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      router.push('/');
+    }
+  }, [session]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await signIn('credentials', {
+    const response = await signIn('credentials', {
       email,
       password,
       redirect: false,
     });
-    console.log(email, password);
+
+    if (!response) {
+      return;
+    }
+
+    if (response.status != 200) {
+      await errorAlert(swal, response.error!);
+      return;
+    }
+
+    await successAlertTimer(swal, 'تم تسجيل الدخول بنجاح');
+    router.push('/');
   };
   return (
     <div className='body-background'>
@@ -41,7 +67,6 @@ const Login = () => {
                             className='form-control form-control-user'
                             type='email'
                             id='email'
-                            aria-describedby='emailHelp'
                             placeholder='الإيميل'
                             name='email'
                           />
@@ -57,7 +82,7 @@ const Login = () => {
                             name='password'
                           />
                         </div>
-                        <div className='form-group'>
+                        {/* <div className='form-group'>
                           <div className='text-right text-sm-right text-md-right text-lg-right text-xl-right custom-control custom-checkbox small'>
                             <div className='form-check'>
                               <input className='form-check-input custom-control-input' type='checkbox' id='formCheck' />
@@ -66,7 +91,7 @@ const Login = () => {
                               </label>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                         <button className='btn btn-primary btn-block text-white btn-user' id='login-btn' type='submit'>
                           تسجيل الدخول
                         </button>
@@ -79,9 +104,9 @@ const Login = () => {
                         </a>
                       </div>
                       <div className='text-center'>
-                        <a href='/auth/register' className='small redirect-password'>
-                          ما عندك حساب ؟ تفضل من هنا
-                        </a>
+                        <Link href='/auth/register'>
+                          <a className='small redirect-password'>ما عندك حساب ؟ تفضل من هنا</a>
+                        </Link>
                       </div>
                     </div>
                   </div>

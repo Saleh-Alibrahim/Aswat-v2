@@ -15,7 +15,7 @@ export const authRouter = createRouter().mutation('register', {
     if (exists) {
       throw new TRPCError({
         code: 'CONFLICT',
-        message: 'User already exists.',
+        message: 'هذا البريد الالكتروني مستخدم من قبل',
       });
     }
 
@@ -26,8 +26,7 @@ export const authRouter = createRouter().mutation('register', {
     });
     return {
       status: 201,
-      message: 'Account created successfully',
-      result: result.email,
+      message: 'تم انشاء الحساب بنجاح',
     };
   },
 });

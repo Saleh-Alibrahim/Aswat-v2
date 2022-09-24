@@ -4,6 +4,8 @@ import NextAuth, { type NextAuthOptions } from "next-auth";
 import { prisma } from "../../../server/db/client";
 import { env } from "../../../env/server.mjs";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { loginSchema } from "../../../common/validation/auth";
+import { verify } from "argon2";
 
 
 interface ILoginForm {
@@ -13,22 +15,32 @@ interface ILoginForm {
 
 export const authOptions: NextAuthOptions = {
   providers: [
-     CredentialsProvider({
-       name: "Credentials",
-       type: "credentials",
+    CredentialsProvider({
+      name: "Credentials",
+      type: "credentials",
       credentials: {},
       async authorize(credentials, _req) {
-        const { email, password } = credentials as ILoginForm;    
-        if(email !== 'saleh@saleh.com' || password !== '123') {
-          return null;
+        const creds = await loginSchema.parseAsync(credentials);
+    
+        const user = await prisma.user.findFirst({
+          where: { email: creds.email },
+        });
+        if (!user) {
+          throw new Error("خطأ في البريد الالكتروني او كلمة المرور");
         }
-        return {
-          id: 1,
-          name: 'Saleh',
-          email: 'saleh@saleh.com',
-          role:'admin'
+       
+         const isValidPassword = await verify(user.password, creds.password);
+
+        if (!isValidPassword) {
+          throw new Error("خطأ في البريد الالكتروني او كلمة المرور");
         }
-      },
+
+         return {
+          id: user.id,
+          email: user.email,
+          username: user.username,
+        };
+      }
     }),
   ],
   pages: {
@@ -46,9 +58,6 @@ export const authOptions: NextAuthOptions = {
        return token;
      }
   },
-  jwt: {
-    secret: env.NEXTAUTH_SECRET,
-   }
 };
 
 export default NextAuth(authOptions);

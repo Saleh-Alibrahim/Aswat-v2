@@ -1,6 +1,11 @@
+import { signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 import React from 'react';
 
 const Navbar = () => {
+  const { data: session } = useSession();
+  console.log(session);
+
   return (
     <nav className='navbar navbar-expand-lg navbar-dark navbar-custom fixed-top'>
       {/* <a className='navbar-brand logo-text ' href='/'>
@@ -26,26 +31,37 @@ const Navbar = () => {
 
       <div className='collapse navbar-collapse' id='main-navbar'>
         <ul id='main-nav-display' className='navbar-nav ml-auto'>
-          <li className='nav-item'>
-            <a className='logout nav-link d-none' href='/auth/logout'>
-              تسجيل الخروج
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a className='settings nav-link d-none' href='/settings'>
-              الإعدادات
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a className='login nav-link' href='/auth/login'>
-              تسجيل الدخول
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a className='nav-link' href='/dashboard'>
-              اصواتي
-            </a>
-          </li>
+          {session ? (
+            <>
+              <li className='nav-item'>
+                <a
+                  className='logout nav-link'
+                  onClick={() => {
+                    signOut();
+                  }}
+                >
+                  تسجيل الخروج
+                </a>
+              </li>
+              <li className='nav-item'>
+                <Link href='/settings'>
+                  <a className='settings nav-link float-right'>الإعدادات</a>
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link href='/dashboard'>
+                  <a className='nav-link'>اصواتي</a>
+                </Link>
+              </li>
+            </>
+          ) : (
+            <li className='nav-item'>
+              <Link href='/auth/login'>
+                <a className='login nav-link float-right'>تسجيل الدخول</a>
+              </Link>
+            </li>
+          )}
+
           <li className='nav-item'>
             <a className='nav-link' href='/create'>
               إنشاء التصويت
@@ -83,21 +99,31 @@ const Navbar = () => {
               إنشاء التصويت
             </a>
           </li>
-          <li className='nav-item'>
-            <a className='login nav-link float-right' href='/auth/login'>
-              تسجيل الدخول
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a className='settings nav-link d-none float-right' href='/settings'>
-              الإعدادات
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a className='logout nav-link d-none float-right' href='/auth/logout'>
-              تسجيل الخروج
-            </a>
-          </li>
+          {session ? (
+            <>
+              <li className='nav-item'>
+                <Link href='/settings'>
+                  <a className='settings nav-link float-right'>الإعدادات</a>
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <a
+                  className='logout nav-link'
+                  onClick={() => {
+                    signOut();
+                  }}
+                >
+                  تسجيل الخروج
+                </a>
+              </li>
+            </>
+          ) : (
+            <li className='nav-item'>
+              <Link href='/auth/login'>
+                <a className='login nav-link float-right'>تسجيل الدخول</a>
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
