@@ -8,9 +8,6 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <Script src='https://code.jquery.com/jquery-3.5.1.js' />
-        <Script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' />
-        <Script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js' />
       </body>
     </Html>
   );

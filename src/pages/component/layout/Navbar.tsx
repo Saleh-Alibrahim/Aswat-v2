@@ -4,7 +4,6 @@ import React from 'react';
 
 const Navbar = () => {
   const { data: session } = useSession();
-  console.log(session);
 
   return (
     <nav className='navbar navbar-expand-lg navbar-dark navbar-custom fixed-top'>

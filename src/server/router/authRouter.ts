@@ -8,7 +8,6 @@ export const authRouter = createRouter().mutation('register', {
   input: signUpSchema,
   resolve: async ({ input, ctx }) => {
     const { username, email, password } = input;
-    console.log('input', input);
     const exists = await ctx.prisma.user.findFirst({
       where: { email },
     });
